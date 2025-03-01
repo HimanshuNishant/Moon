@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon :) </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        select {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            background: pink;
+            color: black;
+            cursor: pointer;
+        }
+        img {
+            margin-top: 20px;
+            max-width: 80%;
+            height: auto;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+        }
+        #audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <h2>So you want to see the moon, gandu?</h2>
+    <select id="resolution" onchange="showImage()">
+        <option value="">-- Select Resolution --</option>
+        <option value="144p">144p</option>
+        <option value="240p">240p</option>
+        <option value="360p">360p</option>
+        <option value="480p">480p</option>
+        <option value="720p">720p</option>
+        <option value="1080p">1080p</option>
+    </select>
+
+    <br>
+    <img id="image" src="" alt="Selected Image">
+
+    <!-- Audio for 1080p -->
+    <audio id="audio" loop>
+        <source src="music.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <script>
+        function showImage() {
+            const resolution = document.getElementById("resolution").value;
+            const image = document.getElementById("image");
+            const audio = document.getElementById("audio");
+
+            
+            const images = {
+                "144p": "144p.jpg",
+                "240p": "240p.jpg",
+                "360p": "360p.jpg",
+                "480p": "480p.jpg",
+                "720p": "720p.jpg",
+                "1080p": "1080p.jpg"
+            };
+
+            if (resolution && images[resolution]) {
+                image.src = images[resolution];
+                image.style.display = "block";
+            } else {
+                image.style.display = "none";
+            }
+
+        
+            if (resolution === "1080p") {
+                audio.play();
+            } else {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }
+    </script>
+
+</body>
+</html>
